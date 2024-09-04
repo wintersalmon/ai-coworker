@@ -1,0 +1,39 @@
+1. **TEMPLATE**
+
+You are a highly skilled software engineer and code review expert. Your goal is to analyze the following code carefully, identify any potential issues, and offer constructive feedback to help improve its quality. Your feedback should cover multiple aspects, including but not limited to:
+1. **Code Readability:** Comment on whether the code is clear, easy to follow, and well-organized. Suggest improvements for better readability, such as meaningful variable names, consistent indentation, and proper use of comments.
+2. **Code Efficiency:** Analyze the code’s performance. Suggest optimizations where necessary, and point out areas where the code could be refactored to run more efficiently or reduce complexity (e.g., time complexity or memory usage).
+3. **Best Practices & Standards:** Ensure the code follows best practices for the relevant programming language or framework. Check for adherence to coding standards, including naming conventions, proper error handling, and design patterns.
+4. **Security & Vulnerabilities:** Identify any security concerns or vulnerabilities within the code, such as input validation, handling sensitive data, and potential injection flaws. Suggest security improvements to make the code more robust.
+5. **Modularity & Scalability:** Assess how modular and scalable the code is. Provide feedback on whether functions and classes are broken down appropriately and how the code will adapt to future growth or changes.
+6. **Edge Cases & Testing:** Identify edge cases that may not be handled by the code and provide suggestions to address them. Recommend areas where additional test cases should be written, and evaluate the existing testing coverage if any.
+When reviewing, be specific in your feedback, offering code examples for improvement where possible. If the code is good, acknowledge its strengths. Use a friendly and professional tone to encourage continuous improvement.
+
+---
+
+Here is the code snippet for review:
+```{language}
+{code_snippet}
+```
+
+2. **INPUT**
+- language: 'python'
+- code_snippet: 'def add(a, b):\n    return a + b'
+
+3. **RESULT**
+
+content='Hello! Let\'s analyze the provided Python function step by step:\n\n**Code Readability:**\n- The function name `add` is clear and descriptive.\n- The parameters `a` and `b` are single-character variables, which could be improved for readability. Consider using more descriptive variable names like `first_number` and `second_number`.\n- No comments or docstrings are present to explain what the function does or its inputs/outputs.\n\n**Code Efficiency:**\n- The time complexity of this function is O(1), which is as efficient as it gets for this kind of operation.\n- There\'s no room for optimization here, but consider using built-in Python functions `sum()` when adding more than two numbers to improve readability and maintainability.\n\n```python\ndef add(*numbers):\n    return sum(numbers)\n```\n\n**Best Practices & Standards:**\n- Follow PEP 8 style guide:\n  - Add two blank lines before the function definition.\n  - Use docstrings to explain what the function does, its inputs, and outputs.\n  - Type hinting is not used for input/output parameters.\n\n**Security & Vulnerabilities:**\n- There are no apparent security concerns in this simple addition operation. However, it\'s essential to validate inputs when dealing with user-provided data to prevent unexpected behavior or security vulnerabilities like type errors.\n\n**Modularity & Scalability:**\n- The function is quite modular and can be easily adapted for more complex operations by leveraging Python\'s dynamic typing and the `*args` parameter.\n- It could also be extended to handle different types of numbers (e.g., float, complex) or perform additional checks on inputs.\n\n**Edge Cases & Testing:**\n- No edge cases are handled in this function. Consider adding error checking for non-numeric input types:\n\n```python\ndef add(*numbers):\n    if all(isinstance(num, (int, float)) for num in numbers):\n        return sum(numbers)\n    else:\n        raise TypeError("All inputs must be numeric.")\n```\n\n**Strengths:**\n- The function is short and simple to understand.\n- It follows a single responsibility principle – adding two numbers.\n\nOverall, the code is quite good but can be improved by adhering to PEP 8 style guide, adding type hints, including docstrings, and handling edge cases. Well done! Keep up the good work!\n\nBest,\n[Your Name]'
+response_metadata={
+    'model': 'mistral-nemo',
+    'created_at': '2024-09-04T05:11:56.679Z',
+    'message': {'role': 'assistant', 'content': ''},
+    'done_reason': 'stop',
+    'done': True,
+    'total_duration': 35119170709,
+    'load_duration': 10896258667,
+    'prompt_eval_count': 387,
+    'prompt_eval_duration': 1969395000,
+    'eval_count': 484,
+    'eval_duration': 22248178000
+}
+id='run-dbf5bea0-81a0-4fed-84d4-8bc3d99a223c-0'
