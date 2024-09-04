@@ -21,6 +21,28 @@ Here is the code snippet for review:
 PROMPT_TEMPLATE = PromptTemplate.from_template(TEMPLATE_FOR_CODE_REVIEW_EXPERT)
 
 def get_code_review_feedback(llm: BaseChatModel, language: str, code_snippet: str) -> str:    
+    """
+    Generates code review feedback for a given code snippet.
+
+    Args:
+        llm (BaseChatModel): The language model used for generating feedback.
+        language (str): The programming language of the code snippet.
+        code_snippet (str): The code snippet to be reviewed.
+
+    Returns:
+        str: The generated code review feedback.
+
+    Raises:
+        None
+
+    Example:
+        llm = BaseChatModel()
+        language = "Python"
+        code_snippet = "def add(a, b):\n    return a + b"
+        feedback = get_code_review_feedback(llm, language, code_snippet)
+        print(feedback)
+    """
+
     PROMPT = PROMPT_TEMPLATE.invoke({
         "language": language ,
         "code_snippet": code_snippet
