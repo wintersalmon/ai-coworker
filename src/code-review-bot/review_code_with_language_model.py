@@ -1,3 +1,4 @@
+from typing import Optional
 from langchain_core.prompts import PromptTemplate
 from langchain_core.language_models.chat_models import BaseChatModel
 
@@ -19,19 +20,21 @@ Here is the code snippet for review:
 ```
 """
 
-
 def generate_code_review_prompt(language: str, code_snippet: str) -> str:
     """
     Generates a prompt for reviewing the given code snippet using the provided language model.
     """
-
-    BASE_PROMPT_TEMPLATE = PromptTemplate.from_template(CODE_REVIEW_PROMPT_TEMPLATE)
-
-    return BASE_PROMPT_TEMPLATE.invoke({"language": language, "code_snippet": code_snippet})
-
+    if not isinstance(language, str) or not language:
+        raise ValueError("'language' must be a non-empty string")
+    if not isinstance(code_snippet, str) or not code_snippet:
+        raise ValueError("'code_snippet' must be a non-empty string")
+    
+    return PromptTemplate.from_template(CODE_REVIEW_PROMPT_TEMPLATE).invoke(
+        {"language": language, "code_snippet": code_snippet}
+    )
 
 def review_code_with_language_model(
-    llm: BaseChatModel,
+    llm: Optional[BaseChatModel],
     language: str,
     code_snippet: str,
 ) -> str:
@@ -39,7 +42,7 @@ def review_code_with_language_model(
     Generates code review feedback for a given code snippet using the provided language model.
 
     Args:
-        llm (BaseChatModel, optional): The language model used for generating feedback. Defaults to None.
+        llm (Optional[BaseChatModel]): The language model used for generating feedback.
         language (str): The programming language of the code snippet.
         code_snippet (str): The code snippet to be reviewed.
 
@@ -47,20 +50,16 @@ def review_code_with_language_model(
         str: The generated code review feedback.
 
     Raises:
-        TypeError: If `llm`, `language`, or `code_snippet` is not of the correct type.
-        ValueError: If `language` or `code_snippet` is empty.
-
-    Example:
-        llm = BaseChatModel()
-        language = "Python"
-        code_snippet = "def add(a, b):\\n    return a + b"
-        feedback = review_code_with_language_model(llm, language, code_snippet)
-        print(feedback)
+        ValueError: If `language` or `code_snippet` is invalid.
     """
+    if not llm or not isinstance(llm, BaseChatModel):
+        raise TypeError("Expected 'llm' to be an instance of BaseChatModel")
+
     if not isinstance(language, str) or not language:
         raise ValueError("'language' must be a non-empty string")
     if not isinstance(code_snippet, str) or not code_snippet:
         raise ValueError("'code_snippet' must be a non-empty string")
 
     prompt = generate_code_review_prompt(language, code_snippet)
+
     return llm.invoke(prompt) if llm else "No language model provided"
