@@ -1,0 +1,20 @@
+Nodes:[
+    Node(id='Mariecurie', type='Person'),
+    Node(id='Poland', type='Country'),
+    Node(id='France', type='Country')
+]
+
+Relationships:[
+    Relationship(source=Node(id='Mariecurie', type='Person'), target=Node(id='Poland', type='Country'), type='LOCATED_IN'),
+    Relationship(source=Node(id='Mariecurie', type='Person'), target=Node(id='France', type='Country'), type='LOCATED_IN')
+]
+
+
+Nodes:[
+    Node(id='Marie Curie', type='Person'),
+    Node(id='Polish', type='Country')
+]
+
+Relationships:[
+    Relationship(source=Node(id='Marie Curie', type='Person'), target=Node(id='Polish', type='Country'), type='NATIONALITY')
+]

@@ -1,0 +1,10 @@
+Nodes:[
+    Node(id='Marie Curie', type='Person', properties={'born_year': '1867'}),
+    Node(id='Poland', type='Country'),
+    Node(id='France', type='Country')
+]
+
+Relationships:[
+    Relationship(source=Node(id='Marie Curie', type='Person'), target=Node(id='Poland', type='Country'), type='NATIONALITY'),
+    Relationship(source=Node(id='Marie Curie', type='Person'), target=Node(id='France', type='Country'), type='NATIONALITY')
+]

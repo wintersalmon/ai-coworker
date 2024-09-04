@@ -15,6 +15,9 @@ langgraph = "^0.1.8"
 duckduckgo-search = "^6.2.0"
 langchain-experimental = "^0.0.62"
 pygame = "^2.6.0"
+json-repair = "^0.28.3"
+requests = "^2.32.3"
+beautifulsoup4 = "^4.12.3"
 
 
 [build-system]
