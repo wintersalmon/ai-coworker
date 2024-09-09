@@ -4,7 +4,6 @@ load_dotenv()
 
 GITHUB_PROJECT_TOKEN_AI_COWORKER = dotenv_values()["GITHUB_PROJECT_TOKEN_AI_COWORKER"]
 
-import json
 from langchain_community.chat_models import ChatOllama
 from libraries.fetch_pull_request_changed_files import fetch_pull_request_changed_files
 from libraries.dto.PullRequestMetaDTO import PullRequestMetaDTO
