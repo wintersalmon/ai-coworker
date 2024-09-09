@@ -1,6 +1,8 @@
 from typing import Optional
 from langchain_core.prompts import PromptTemplate
-from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_core.language_models import BaseChatModel
+from libraries.code_review.convert_response_to_dto import convert_response_to_dto
+from libraries.dto.LLMResponseDTO import LLMResponseDTO
 
 CODE_REVIEW_PROMPT_TEMPLATE = """
 You are a highly skilled software engineer and code review expert. Your goal is to analyze the following code carefully, identify any potential issues, and offer constructive feedback to help improve its quality. Your feedback should cover multiple aspects, including but not limited to:
@@ -20,7 +22,7 @@ Here is the code snippet for review:
 ```
 """
 
-def generate_code_review_prompt(language: str, code_snippet: str) -> str:
+def generate_code_review_prompt(language: str, code_snippet: str):
     """
     Generates a prompt for reviewing the given code snippet using the provided language model.
     """
@@ -33,11 +35,11 @@ def generate_code_review_prompt(language: str, code_snippet: str) -> str:
         {"language": language, "code_snippet": code_snippet}
     )
 
-def review_code_with_language_model(
+def get_code_review_feedback(
     llm: Optional[BaseChatModel],
     language: str,
     code_snippet: str,
-) -> str:
+) -> LLMResponseDTO:
     """
     Generates code review feedback for a given code snippet using the provided language model.
 
@@ -62,4 +64,6 @@ def review_code_with_language_model(
 
     prompt = generate_code_review_prompt(language, code_snippet)
 
-    return llm.invoke(prompt) if llm else "No language model provided"
+    response = llm.invoke(prompt)
+
+    return convert_response_to_dto(response)
